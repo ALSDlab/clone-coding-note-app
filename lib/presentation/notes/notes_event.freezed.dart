@@ -201,6 +201,8 @@ abstract class _$$DeleteNoteImplCopyWith<T, $Res> {
       __$$DeleteNoteImplCopyWithImpl<T, $Res>;
   @useResult
   $Res call({Note note});
+
+  $NoteCopyWith<$Res> get note;
 }
 
 /// @nodoc
@@ -214,14 +216,22 @@ class __$$DeleteNoteImplCopyWithImpl<T, $Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? note = freezed,
+    Object? note = null,
   }) {
     return _then(_$DeleteNoteImpl<T>(
-      freezed == note
+      null == note
           ? _value.note
           : note // ignore: cast_nullable_to_non_nullable
               as Note,
     ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $NoteCopyWith<$Res> get note {
+    return $NoteCopyWith<$Res>(_value.note, (value) {
+      return _then(_value.copyWith(note: value));
+    });
   }
 }
 
@@ -253,12 +263,11 @@ class _$DeleteNoteImpl<T>
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$DeleteNoteImpl<T> &&
-            const DeepCollectionEquality().equals(other.note, note));
+            (identical(other.note, note) || other.note == note));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(note));
+  int get hashCode => Object.hash(runtimeType, note);
 
   @JsonKey(ignore: true)
   @override
