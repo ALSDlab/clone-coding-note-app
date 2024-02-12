@@ -5,7 +5,6 @@ import 'package:clone_coding_note_app/ui/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../domain/model/note.dart';
 import 'components/note_item.dart';
 
 class NotesScreen extends StatelessWidget {
@@ -33,7 +32,7 @@ class NotesScreen extends StatelessWidget {
               context,
               MaterialPageRoute(
                   builder: (context) => const AddEditNoteScreen()));
-          if (isSaved != null && isSaved){
+          if (isSaved != null && isSaved) {
             viewModel.onEvent(const NotesEvent.loadNotes());
           }
         },
@@ -44,7 +43,21 @@ class NotesScreen extends StatelessWidget {
         children: state.notes
             .map(
               (note) => NoteItem(
-                note: note
+                note: note,
+                onDeleteTap: () {
+                  viewModel.onEvent(NotesEvent.deleteNote(note));
+
+                  final snackBar = SnackBar(
+                    content: const Text('노트가 삭제되었습니다.'),
+                    action: SnackBarAction(
+                      label: '취소',
+                      onPressed: () {
+                        viewModel.onEvent(const NotesEvent.restoreNote());
+                      },
+                    ),
+                  );
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                },
               ),
             )
             .toList(),
