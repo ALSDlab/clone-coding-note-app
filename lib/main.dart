@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primaryColor: Colors.white,
+        primaryColor: darkGray,
         canvasColor: darkGray,
         backgroundColor: darkGray,
         floatingActionButtonTheme:
@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
                   foregroundColor: darkGray,
                 ),
         appBarTheme:
-            Theme.of(context).appBarTheme.copyWith(backgroundColor: darkGray),
+            Theme.of(context).appBarTheme.copyWith(backgroundColor: darkGray,foregroundColor: Colors.white),
         useMaterial3: true,
       ),
       home: const NotesScreen(),
