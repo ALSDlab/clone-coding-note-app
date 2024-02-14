@@ -1,4 +1,5 @@
 import 'package:clone_coding_note_app/presentation/add_edit_note/add_edit_note_screen.dart';
+import 'package:clone_coding_note_app/presentation/notes/components/order_section.dart';
 import 'package:clone_coding_note_app/presentation/notes/notes_event.dart';
 import 'package:clone_coding_note_app/presentation/notes/notes_view_model.dart';
 import 'package:clone_coding_note_app/ui/colors.dart';
@@ -38,9 +39,14 @@ class NotesScreen extends StatelessWidget {
         },
         child: const Icon(Icons.add),
       ),
-      body: ListView(
-        padding: const EdgeInsets.all(8),
-        children: state.notes
+      body: ListView(padding: const EdgeInsets.all(8), children: [
+        OrderSection(
+          noteOrder: state.noteOrder,
+          onOrderChanged: (noteOrder) {
+            viewModel.onEvent(NotesEvent.changeOrder(noteOrder));
+          },
+        ),
+        ...state.notes
             .map(
               (note) => GestureDetector(
                 onTap: () async {
@@ -75,7 +81,7 @@ class NotesScreen extends StatelessWidget {
               ),
             )
             .toList(),
-      ),
+      ]),
     );
   }
 }
